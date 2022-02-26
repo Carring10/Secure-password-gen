@@ -13,6 +13,16 @@ function generatePassword() {
       "Please enter the amount of characters you would like in your password."
     )
   );
+  var includeLowercase = prompt("Include lowercase letters?");
+  var includeUppercase = prompt("Include uppercase letters?");
+  var includeSpecialChar = prompt("Include special characters?");
+  var includeNumbers = prompt("Include numbers?");
+  console.log({
+    includeNumbers,
+    includeUppercase,
+    includeSpecialChar,
+    includeLowercase,
+  });
 
   if (count < 8) {
     alert("Must be at least 8 characters long.");
@@ -24,33 +34,39 @@ function generatePassword() {
     return;
   }
 
-  var includeUppercase = prompt("Include uppercase letters?");
-  console.log(Boolean(includeUppercase));
-
   for (var i = 0; i < count; i++) {
     var randomLetter = letters[Math.floor(Math.random() * letters.length)];
     var randomUppercase =
       uppercase[Math.floor(Math.random() * uppercase.length)];
-    var array = [randomLetter, randomUppercase];
+    var randomSpecialChar =
+      specialChar[Math.floor(Math.random() * specialChar.length)];
+    var randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+
+    var array = [];
+
+    if (includeLowercase || includeLowercase == "") {
+      array.push(randomLetter);
+    }
+
+    if (includeUppercase || includeUppercase == "") {
+      array.push(randomUppercase);
+    }
+
+    if (includeSpecialChar || includeSpecialChar == "") {
+      array.push(randomSpecialChar);
+    }
+
+    if (includeNumbers || includeNumbers == "") {
+      array.push(randomNumber);
+    }
+
     var randomValue = array[Math.floor(Math.random() * array.length)];
     console.log(randomValue);
-    if (includeUppercase) {
-      genPassword += randomValue;
-    }
+
+    genPassword += randomValue;
   }
 
-  var includeSpecialChar = prompt("Include special characters?");
-
-  /* for (var i = 0; i < count; i++) {
-    var random = Math.floor(Math.random() * letters.length);
-    var randomUppercase = Math.floor(Math.random() * uppercase.length);
-    var randomSpecialChar = Math.floor(Math.random() * specialChar.length);
-    var randomNumbers = Math.floor(Math.random() * numbers.length); 
-
-    genPassword += letters[random]; 
-  }*/
-
-  console.log(genPassword);
+  console.log(randomValue);
 
   return genPassword;
 }
