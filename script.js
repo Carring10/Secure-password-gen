@@ -13,16 +13,27 @@ function generatePassword() {
       "Please enter the amount of characters you would like in your password."
     )
   );
+
+  while (!count) {
+    var count = prompt(
+      "Please fill out this field with the amount of characters you would like."
+    );
+  }
+
   var includeLowercase = prompt("Include lowercase letters?");
   var includeUppercase = prompt("Include uppercase letters?");
   var includeSpecialChar = prompt("Include special characters?");
   var includeNumbers = prompt("Include numbers?");
-  console.log({
-    includeNumbers,
-    includeUppercase,
-    includeSpecialChar,
-    includeLowercase,
-  });
+
+  while (
+    includeLowercase !== "" &&
+    includeUppercase !== "" &&
+    includeSpecialChar !== "" &&
+    includeNumbers !== ""
+  ) {
+    alert("None of the fields were filled out.");
+    return "Please answer 'ok' in one of the prompts for a password.";
+  }
 
   if (count < 8) {
     alert("Must be at least 8 characters long.");
